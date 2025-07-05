@@ -295,6 +295,10 @@
         .result-stat-item .stat-label { font-size: 0.8em; color: var(--text-color-muted); text-transform: uppercase; display: block; }
         .result-stat-item .stat-value { font-size: 1.1em; font-weight: 600; }
         .result-stat-item .prize-amount { color: var(--success-color); }
+        #supportPage.page-content p, #supportPage.page-content h3, #supportPage.page-content h2 { color: var(--text-color-muted); }
+        #supportPage.page-content h2 { color: var(--primary-color) !important; border-bottom: none; padding-bottom: 0; }
+        #supportPage.page-content h3 { color: var(--text-color) !important; margin-top: 20px;}
+        #supportPage.page-content strong { color: var(--text-color) !important; }
         @media (max-width: 768px) { header { padding: 10px 15px; min-height: 65px; } header h1#appHeaderText { font-size: 0.95em; max-width: 120px;} .welcome-text { font-size: 0.7em;} .app-logo { width: 40px; height: 40px;} .icon-btn svg { width: 22px; height: 22px;} .wallet-display { padding: 4px 8px; font-size: 0.8em; gap: 4px;} .wallet-display svg { width: 16px; height: 16px;} .logout-btn-header { padding: 5px 10px; font-size: 0.75em;} .tournament-grid { grid-template-columns: 1fr; } .tournament-card { padding: 12px; } .card-title { font-size: 1.15em; } .stat-value { font-size: 1em; } .modal-content { width: 90%; margin: 10% auto; padding: 20px; } .modal-content h2, .modal-content h3 { font-size: 1.5em; } .page-content h2 { font-size: 1.6em; } .submit-btn, #loginForm .login-button { padding: 10px 18px; font-size: 1em; } .balance-amount { font-size: 2.5em; } .btn-wallet-action { flex-direction: column; align-items: center; } .btn-wallet { width: 100%; max-width: 300px; } .game-selector-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 480px) { .announcement-icon { padding: 0 15px; } .announcement-icon svg { width: 24px; height: 24px; } .announcement-content { padding: 10px 15px; } .announcement-content p { font-size: 0.85em; } .container { padding: 0 10px; } header { padding: 8px 12px; min-height: 60px; gap: 8px; } .header-left { gap: 10px; } header h1#appHeaderText { font-size: 1em; max-width: 100px; } .app-logo { width: 38px; height: 38px; border-width: 1.5px;} .header-right { gap: 8px; } .wallet-display { padding: 5px 8px; font-size: 0.8em; gap: 4px; border-width: 1px;} .wallet-display svg { width: 16px; height: 16px;} .logout-btn-header { display: none; } .page-content { padding: 15px 0; } .page-content > h2 { font-size: 1.4em;} .tournament-card { padding: 10px; } .card-top-info { font-size: 0.75em; } .card-tag, .card-status-badge { padding: 3px 8px; font-size: 0.85em; } .card-title { font-size: 1.1em; } .card-date { font-size: 0.8em; } .stat-label { font-size: 0.7em;} .stat-value { font-size: 0.95em; } .card-actions .btn { font-size: 0.85em; padding: 8px 10px; } .modal-content { width: 95%; padding: 15px; margin: 5% auto; } .modal-content h2, .modal-content h3 { font-size: 1.3em;} .close-btn { font-size: 28px; top: 10px; right: 15px;} .submit-btn, #loginForm .login-button { font-size: 0.95em; padding: 10px 15px; } #notification { width: 90%; font-size: 0.85em; padding: 10px 15px; bottom: 85px; } .balance-amount { font-size: 2.2em; } .btn-wallet-action { font-size: 1em; padding: 12px 15px; } .transactions-title { font-size: 1.3em; } .qr-code-container img { max-width: 200px; } .modal-subtitle { font-size: 0.85em; } #addAmountModal .modal-content h2 { font-size: 1.5em; } .game-selector-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
@@ -416,10 +420,10 @@
                     <button class="submit-btn" style="max-width: 250px; margin: 25px auto 0 auto; display: block;" onclick="openProfileModal()">Edit Profile</button>
                     <div class="profile-links-section">
                         <h3>More Information</h3>
-                        <a class="profile-link" onclick="openPolicyModal('Privacy Policy', 'This is a placeholder for your Privacy Policy. Please replace this text with your actual policy content. \n\nWe are committed to protecting your privacy. This policy outlines how we collect, use, and safeguard your personal information.')">Privacy Policy</a>
-                        <a class="profile-link" onclick="openPolicyModal('Terms & Conditions', 'This is a placeholder for your Terms & Conditions. Please replace this text with your actual terms. \n\nBy using this app, you agree to comply with and be bound by the following terms and conditions of use.')">Terms & Conditions</a>
-                        <a class="profile-link" onclick="openPolicyModal('Refund & Cancellation', 'This is a placeholder for your Refund & Cancellation Policy. \n\n- Entry fees are non-refundable once a tournament has started.\n- If a tournament is canceled by the administration, all entry fees will be refunded to the user\'s wallet.\n- Withdrawal requests are processed within 24-48 hours.')">Refund & Cancellation</a>
-                        <a class="profile-link" onclick="openPolicyModal('Fair Play Policy', 'This is a placeholder for your Fair Play Policy. \n\n- All players must compete to the best of their ability.\n- Use of cheats, hacks, or any third-party software is strictly prohibited.\n- Abusive language and unsportsmanlike conduct will not be tolerated.\n- Violation of these rules may result in a permanent ban.')">Fair Play Policy</a>
+                        <a class="profile-link" onclick="openPolicyModal('privacyPolicy', 'Privacy Policy')">Privacy Policy</a>
+                        <a class="profile-link" onclick="openPolicyModal('termsAndConditions', 'Terms & Conditions')">Terms & Conditions</a>
+                        <a class="profile-link" onclick="openPolicyModal('refundPolicy', 'Refund & Cancellation')">Refund & Cancellation</a>
+                        <a class="profile-link" onclick="openPolicyModal('fairPlayPolicy', 'Fair Play Policy')">Fair Play Policy</a>
                         <a class="profile-link" onclick="navigateToPage('supportPage')">Help & Support</a>
                     </div>
                 </div>
@@ -450,7 +454,10 @@
                     </div>
                 </div>
             </div>
-            <div id="supportPage" class="page-content"><h2>Support & Help</h2><h3>FAQs</h3><p><strong>Q: How to register?</strong> A: Go to Tournaments, pick one, click Join.</p><p><strong>Q: Room ID/Pass?</strong> A: Check "My Games" page before match time or look for in-app notifications.</p><h3>Contact Us</h3><p>Email: support@example.com (Placeholder)</p><p><a href="#" onclick="alert('Live chat / Ticketing placeholder.')" style="color: var(--info-color);">Live Chat (Placeholder)</a></p></div>
+            <div id="supportPage" class="page-content">
+                <!-- This content will be dynamically loaded from the database -->
+                <div class="loading-spinner"></div>
+            </div>
         </div>
     </div>
 
@@ -524,6 +531,7 @@
         // Global variables & Element references
         let currentUser = null, allTournamentsCache = [], isSignUpMode = false;
         let selectedGame = null;
+        let appPoliciesCache = {};
         
         const loginPageContainer = document.getElementById('loginPageContainer'), mainAppContentDiv = document.getElementById('mainAppContent'), loginForm = document.getElementById('loginForm'), emailInput = document.getElementById('emailInput'), passwordInput = document.getElementById('passwordInput'), passwordGroup = document.getElementById('passwordGroup'), usernameGroup = document.getElementById('usernameGroup'), usernameInput = document.getElementById('usernameInput'), authButton = document.getElementById('authButton'), toggleAuthModeLink = document.getElementById('toggleAuthMode'), formTitle = document.getElementById('formTitle'), appNavigation = document.getElementById('appNavigation'), pages = document.querySelectorAll('#mainAppContent .page-content'), tournamentsLoader = document.getElementById('tournamentsLoader'), tournamentGrid = document.getElementById('tournamentGrid'), notificationDiv = document.getElementById('notification'), appLogoImage = document.getElementById('appLogoImage'), appHeaderText = document.getElementById('appHeaderText'), welcomeText = document.querySelector('.welcome-text'), walletHeaderBtn = document.getElementById('walletHeaderBtn'), headerWalletBalance = document.getElementById('headerWalletBalance'), logoutBtnHeader = document.getElementById('logoutBtnHeader'), headerContactBtn = document.querySelector('.header-contact-btn'), forgotPasswordLink = document.getElementById('forgotPasswordLink'), forgotPasswordForm = document.getElementById('forgotPasswordForm'), backToLoginLink = document.getElementById('backToLoginLink'), resetEmailInput = document.getElementById('resetEmailInput'), addAmountForm = document.getElementById('addAmountForm'), withdrawForm = document.getElementById('withdrawForm'), announcementSection = document.getElementById('announcementSection'), tournamentFilterTabs = document.getElementById('tournamentFilterTabs');
         
@@ -551,6 +559,7 @@
         document.addEventListener('DOMContentLoaded', () => { 
             loadAnnouncements();
             fetchAdminSettings();
+            fetchPolicies();
             updateAuthFormUI(); 
             
             if(tournamentFilterTabs) {
@@ -570,7 +579,7 @@
             if (user) { 
                 currentUser = user; 
                 welcomeText.textContent = `Welcome, ${user.displayName || user.email.split('@')[0]}`; 
-                appHeaderText.textContent = "BoomBattle"; 
+                appHeaderText.textContent = "Boom Battle"; 
                 logoutBtnHeader.style.display = 'inline-block'; 
                 walletHeaderBtn.style.display = 'flex'; 
                 headerContactBtn.style.display = 'flex'; 
@@ -663,11 +672,44 @@
                 renderHomePageContent();
             }
 
+            if (pageId === 'supportPage') {
+                const pageContainer = document.getElementById('supportPage');
+                if (pageContainer) {
+                    const supportContent = appPoliciesCache['supportInfo'];
+                    if (supportContent) {
+                        const formattedContent = supportContent
+                            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                            .replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
+                            .replace(/\*(.*)\*/g, '<em>$1</em>')
+                            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: var(--info-color);">$1</a>')
+                            .replace(/\n/g, '<br>');
+                        pageContainer.innerHTML = formattedContent;
+                    } else {
+                        pageContainer.innerHTML = `<h2>Support & Help</h2><h3>FAQs</h3><p><strong>Q: How to register?</strong> A: Go to Tournaments, pick one, click Join.</p><p><strong>Q: Room ID/Pass?</strong> A: Check "My Games" page before match time or look for in-app notifications.</p><h3>Contact Us</h3><p>Email: support@example.com (Placeholder)</p><p><a href="#" onclick="alert('Live chat / Ticketing placeholder.')" style="color: var(--info-color);">Live Chat (Placeholder)</a></p>`;
+                    }
+                }
+            }
+
+
             const announcementSection = document.getElementById('announcementSection');
             if(announcementSection){
                 const hasText = document.getElementById('announcementText')?.textContent.trim() !== '' && document.getElementById('announcementText')?.textContent.trim() !== 'Loading announcements...';
                 announcementSection.style.display = (pageId === 'homePage' && hasText) ? 'flex' : 'none';
             }
+        }
+        
+        function fetchPolicies() {
+            db.collection('appSettings').doc('policies').onSnapshot(doc => {
+                if (doc.exists) {
+                    appPoliciesCache = doc.data();
+                } else {
+                    console.warn("Policies document not found in appSettings.");
+                    appPoliciesCache = {};
+                }
+            }, error => {
+                console.error("Error fetching policies:", error);
+            });
         }
 
         function navigateToGameTournaments(gameName, isInitialLoad = false) {
@@ -880,8 +922,6 @@
         async function loadWalletBalance(){if(!currentUser)return;try{const d=await db.collection('users').doc(currentUser.uid).get();let b=0;if(d.exists&&d.data().walletBalance!==undefined)b=parseFloat(d.data().walletBalance);else if(d.exists&&d.data().walletBalance===undefined)await db.collection('users').doc(currentUser.uid).update({walletBalance:0});else if(!d.exists)await db.collection('users').doc(currentUser.uid).set({username:currentUser.displayName||currentUser.email.split('@')[0],email:currentUser.email,ffId:'',ign:'',createdAt:firebase.firestore.FieldValue.serverTimestamp(),walletBalance:0},{merge:true});if(walletBalanceSpan)walletBalanceSpan.textContent=`₹${b.toFixed(2)}`;if(withdrawModalBalanceSpan)withdrawModalBalanceSpan.textContent=`₹${b.toFixed(2)}`;if(headerWalletBalance)headerWalletBalance.textContent=`₹${b.toFixed(0)}`;if(document.getElementById('withdrawAmount'))document.getElementById('withdrawAmount').max=b.toFixed(2);}catch(e){console.error("Wallet balance error:",e);if(walletBalanceSpan)walletBalanceSpan.textContent=`₹Error`;if(withdrawModalBalanceSpan)withdrawModalBalanceSpan.textContent=`₹Error`;if(headerWalletBalance)headerWalletBalance.textContent=`₹Err`;}}
         async function loadTransactionHistory() { if (!currentUser) return; const container = document.getElementById('transactionHistoryContainer'); const loader = document.getElementById('transactionHistoryLoader'); if (!container || !loader) return; loader.style.display = 'block'; container.innerHTML = ''; try { const querySnapshot = await db.collection('transactions').where('userId', '==', currentUser.uid).orderBy('timestamp', 'desc').limit(20).get(); if (querySnapshot.empty) { container.innerHTML = "<p style='text-align:center; color: var(--text-color-muted);'>You have no recent transactions.</p>"; return; } const upArrowSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>`; const downArrowSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>`; let listHTML = ''; querySnapshot.forEach(doc => { const data = doc.data(); const date = data.timestamp ? data.timestamp.toDate().toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'N/A'; const isCredit = data.type === 'credit'; const amountClass = isCredit ? 'credit' : 'debit'; const amountSign = isCredit ? '+' : '-'; const iconSVG = isCredit ? upArrowSVG : downArrowSVG; let description = data.description || 'N/A'; if (data.status === 'Pending') { description += ' <span style="color:var(--primary-color); font-style:italic;">(Pending)</span>'; } listHTML += ` <div class="transaction-item"> <div class="transaction-item-icon ${amountClass}">${iconSVG}</div> <div class="transaction-details"> <div class="transaction-description">${description}</div> <div class="transaction-date">${date}</div> </div> <div class="transaction-item-amount ${amountClass}"> ${amountSign}₹${(data.amount || 0).toFixed(2)} </div> </div> `; }); container.innerHTML = listHTML; } catch (error) { console.error("Error loading transaction history:", error); container.innerHTML = "<p style='text-align:center; color: var(--danger-color);'>Could not load transaction history.</p>"; showNotification("Error loading transactions.", "error"); } finally { loader.style.display = 'none'; } }
         function openWithdrawModal(){ loadWalletBalance(); if(withdrawForm) withdrawForm.reset(); openModal('withdrawModal'); }
-
-        // <<<--- [UPDATED CODE BLOCK FOR USER APP] ---
         if (withdrawForm) {
             withdrawForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -1033,7 +1073,20 @@
         let notificationTimeout;function showNotification(msg,type="success"){clearTimeout(notificationTimeout);notificationDiv.textContent=msg;let bg;switch(type){case "success":bg="var(--success-color)";break;case "error":bg="var(--danger-color)";break;case "info":bg="var(--info-color)";break;case "warning":bg="var(--primary-color)";break;default:bg="var(--secondary-color)";}notificationDiv.style.backgroundColor=bg;notificationDiv.style.display="block";notificationTimeout=setTimeout(()=>{notificationDiv.style.display="none";},4000);}
         function copyToClipboard(text, entityName = "Text") { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(() => { showNotification(`${entityName} copied to clipboard!`, "success"); }).catch(err => { fallbackCopyTextToClipboard(text, entityName); }); } else { fallbackCopyTextToClipboard(text, entityName); } }
         function fallbackCopyTextToClipboard(text, entityName) { const ta = document.createElement("textarea"); ta.value = text; ta.style.position="fixed"; ta.style.top="0";ta.style.left="0";ta.style.width="2em";ta.style.height="2em";ta.style.padding="0";ta.style.border="none";ta.style.outline="none";ta.style.boxShadow="none";ta.style.background="transparent"; document.body.appendChild(ta); ta.focus(); ta.select(); try { if(document.execCommand('copy')) showNotification(`${entityName} copied!`, "success"); else showNotification(`Failed to copy ${entityName}.`, "warning"); } catch (err) { showNotification(`Failed to copy ${entityName}.`, "warning");} document.body.removeChild(ta); }
-        function openPolicyModal(title, content) { const modalTitle = document.getElementById('policyModalTitle'); const modalContent = document.getElementById('policyModalContent'); if (modalTitle && modalContent) { modalTitle.textContent = title; modalContent.textContent = content; openModal('policyModal'); } }
+        function openPolicyModal(policyKey, title) {
+            const modalTitle = document.getElementById('policyModalTitle');
+            const modalContent = document.getElementById('policyModalContent');
+            if (modalTitle && modalContent) {
+                modalTitle.textContent = title;
+                const content = appPoliciesCache[policyKey];
+                if (content) {
+                    modalContent.textContent = content;
+                } else {
+                    modalContent.textContent = `Content for "${title}" is not available at the moment. Please check back later.`;
+                }
+                openModal('policyModal');
+            }
+        }
         
     </script>
 </body>
