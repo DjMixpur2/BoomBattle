@@ -18,6 +18,8 @@
             --icon-color-default: var(--text-color-muted); --icon-color-prize: #FFD700;
             --header-bg: #1A2238; --header-icon-color: #E6EDF3; --wallet-border-color: #ced6e0;
             --app-logo-border: #8B949E; --header-bottom-border: #2F3B52;
+            --google-btn-bg: #FFFFFF; --google-btn-text: #333333; --google-btn-border: #dddddd;
+            --email-btn-bg: var(--info-color); --email-btn-text: #FFFFFF;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -122,7 +124,6 @@
             font-size: 0.9em; font-weight: 600; text-decoration: none;
         }
 
-
         .wallet-display { background-color: white; color: black; padding: 8px 14px; border-radius: 6px; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9em; border: 1.5px dashed var(--wallet-border-color); cursor: pointer; transition: transform 0.2s ease; white-space: nowrap; }
         .wallet-display:hover { transform: scale(1.05); }
         .wallet-display svg { width: 20px; height: 20px; fill: black; }
@@ -143,8 +144,17 @@
         .user-nav-item.active[data-page="walletPage"] span { color: var(--accent-cyan); }
         .user-nav-item.active[data-page="myProfilePage"] svg { fill: var(--secondary-color); }
         .user-nav-item.active[data-page="myProfilePage"] span { color: var(--secondary-color); }
+
+        /* --- NEW/MODIFIED LOGIN PAGE STYLES --- */
         #loginPageContainer { display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; padding: 20px; text-align: center; }
-        #loginForm, #forgotPasswordForm { max-width: 400px; width:100%; padding: 25px 30px; background-color: var(--card-background); border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); border: 1px solid var(--border-color); }
+        #loginOptionsContainer { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 320px; }
+        .login-logo { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin-bottom: 40px; border: 3px solid var(--border-color); padding: 4px; background-color: var(--card-background); }
+        .login-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 12px 20px; border-radius: 8px; border: 1px solid transparent; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.2s ease-in-out; margin-bottom: 15px; }
+        .login-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+        .login-btn svg { width: 22px; height: 22px; }
+        .google-login-btn { background-color: var(--google-btn-bg); color: var(--google-btn-text); border-color: var(--google-btn-border); }
+        .email-login-btn { background-color: var(--email-btn-bg); color: var(--email-btn-text); }
+        #loginForm, #forgotPasswordForm { max-width: 400px; width:100%; padding: 25px 30px; background-color: var(--card-background); border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); border: 1px solid var(--border-color); display: none; /* Hidden by default */ }
         #loginForm .form-group, #forgotPasswordForm .form-group { text-align: left; margin-bottom: 18px; }
         #loginForm .login-button, #forgotPasswordForm .login-button { margin-top:15px; width: 100%; background-color: var(--accent-yellow); color: var(--accent-yellow-text); font-weight: 600; }
         #loginForm .login-button:hover, #forgotPasswordForm .login-button:hover { background-color: #eab308; }
@@ -152,9 +162,11 @@
         #loginForm .toggle-form:hover, #forgotPasswordForm .toggle-form:hover { text-decoration: underline; }
         #loginForm .auth-links { margin-top: 15px; text-align: center; }
         #loginForm .auth-links .toggle-form { display: inline-block; margin: 5px 10px; }
+        #backToOptionsLink { margin-top: 25px !important; }
         #forgotPasswordForm h2 { color: var(--primary-color); font-size: 1.6em; margin-bottom: 20px; text-align:center;}
         #forgotPasswordForm .login-button { margin-top:10px; width: 100%; background-color: var(--info-color); color:white; }
         #forgotPasswordForm .login-button:hover { background-color: #2980b9; }
+
         #mainAppContent { display: none; }
         .page-content { display: none; padding:20px 0; }
         .page-content.active { display: block; }
@@ -335,6 +347,20 @@
     </div>
     
     <div id="loginPageContainer">
+        <!-- New Login Options View -->
+        <div id="loginOptionsContainer">
+            <img src="https://i.ibb.co/ZzSJXz0D/images-23.jpg" alt="App Logo" class="login-logo">
+            <button id="googleLoginBtn" class="login-btn google-login-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/><path d="M1 1h22v22H1z" fill="none"/></svg>
+                <span>Login with Google</span>
+            </button>
+            <button id="emailLoginBtn" class="login-btn email-login-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <span>Login with Email</span>
+            </button>
+        </div>
+
+        <!-- Existing Email/Password Form (now hidden by default) -->
         <form id="loginForm">
             <h2 id="formTitle">Login</h2>
             <div class="form-group"><label for="emailInput">Email:</label><input type="email" id="emailInput" required></div>
@@ -343,9 +369,11 @@
             <button type="submit" class="login-button" id="authButton">Login</button>
             <div class="auth-links">
                 <span class="toggle-form" id="toggleAuthMode">Need an account? Sign Up</span>
-                <span class="toggle-form" id="forgotPasswordLink" style="display: block; margin-top: 10px;">Forgot Password?</span>
+                <span class="toggle-form" id="forgotPasswordLink">Forgot Password?</span>
             </div>
+             <span class="toggle-form" id="backToOptionsLink">« Back to Login Options</span>
         </form>
+
         <form id="forgotPasswordForm" style="display: none; margin-top: 20px;">
             <h2>Reset Password</h2>
             <div class="form-group"><label for="resetEmailInput">Enter your Email:</label><input type="email" id="resetEmailInput" required></div>
@@ -533,7 +561,14 @@
         let selectedGame = null;
         let appPoliciesCache = {};
         
-        const loginPageContainer = document.getElementById('loginPageContainer'), mainAppContentDiv = document.getElementById('mainAppContent'), loginForm = document.getElementById('loginForm'), emailInput = document.getElementById('emailInput'), passwordInput = document.getElementById('passwordInput'), passwordGroup = document.getElementById('passwordGroup'), usernameGroup = document.getElementById('usernameGroup'), usernameInput = document.getElementById('usernameInput'), authButton = document.getElementById('authButton'), toggleAuthModeLink = document.getElementById('toggleAuthMode'), formTitle = document.getElementById('formTitle'), appNavigation = document.getElementById('appNavigation'), pages = document.querySelectorAll('#mainAppContent .page-content'), tournamentsLoader = document.getElementById('tournamentsLoader'), tournamentGrid = document.getElementById('tournamentGrid'), notificationDiv = document.getElementById('notification'), appLogoImage = document.getElementById('appLogoImage'), appHeaderText = document.getElementById('appHeaderText'), welcomeText = document.querySelector('.welcome-text'), walletHeaderBtn = document.getElementById('walletHeaderBtn'), headerWalletBalance = document.getElementById('headerWalletBalance'), logoutBtnHeader = document.getElementById('logoutBtnHeader'), headerContactBtn = document.querySelector('.header-contact-btn'), forgotPasswordLink = document.getElementById('forgotPasswordLink'), forgotPasswordForm = document.getElementById('forgotPasswordForm'), backToLoginLink = document.getElementById('backToLoginLink'), resetEmailInput = document.getElementById('resetEmailInput'), addAmountForm = document.getElementById('addAmountForm'), withdrawForm = document.getElementById('withdrawForm'), announcementSection = document.getElementById('announcementSection'), tournamentFilterTabs = document.getElementById('tournamentFilterTabs');
+        // --- MODIFIED & NEW ELEMENT REFERENCES FOR LOGIN ---
+        const loginPageContainer = document.getElementById('loginPageContainer');
+        const loginOptionsContainer = document.getElementById('loginOptionsContainer');
+        const googleLoginBtn = document.getElementById('googleLoginBtn');
+        const emailLoginBtn = document.getElementById('emailLoginBtn');
+        const backToOptionsLink = document.getElementById('backToOptionsLink');
+
+        const mainAppContentDiv = document.getElementById('mainAppContent'), loginForm = document.getElementById('loginForm'), emailInput = document.getElementById('emailInput'), passwordInput = document.getElementById('passwordInput'), passwordGroup = document.getElementById('passwordGroup'), usernameGroup = document.getElementById('usernameGroup'), usernameInput = document.getElementById('usernameInput'), authButton = document.getElementById('authButton'), toggleAuthModeLink = document.getElementById('toggleAuthMode'), formTitle = document.getElementById('formTitle'), appNavigation = document.getElementById('appNavigation'), pages = document.querySelectorAll('#mainAppContent .page-content'), tournamentsLoader = document.getElementById('tournamentsLoader'), tournamentGrid = document.getElementById('tournamentGrid'), notificationDiv = document.getElementById('notification'), appLogoImage = document.getElementById('appLogoImage'), appHeaderText = document.getElementById('appHeaderText'), welcomeText = document.querySelector('.welcome-text'), walletHeaderBtn = document.getElementById('walletHeaderBtn'), headerWalletBalance = document.getElementById('headerWalletBalance'), logoutBtnHeader = document.getElementById('logoutBtnHeader'), headerContactBtn = document.querySelector('.header-contact-btn'), forgotPasswordLink = document.getElementById('forgotPasswordLink'), forgotPasswordForm = document.getElementById('forgotPasswordForm'), backToLoginLink = document.getElementById('backToLoginLink'), resetEmailInput = document.getElementById('resetEmailInput'), addAmountForm = document.getElementById('addAmountForm'), withdrawForm = document.getElementById('withdrawForm'), announcementSection = document.getElementById('announcementSection'), tournamentFilterTabs = document.getElementById('tournamentFilterTabs');
         
         window.addEventListener('popstate', (event) => {
             if (event.state && event.state.page) {
@@ -612,8 +647,13 @@
             } else { 
                 currentUser = null;
                 if (announcementSection) announcementSection.style.display = 'none';
-                loginPageContainer.style.display = 'flex'; 
+                // --- MODIFIED LOGOUT VIEW LOGIC ---
                 mainAppContentDiv.style.display = 'none';
+                loginPageContainer.style.display = 'flex';
+                loginOptionsContainer.style.display = 'flex'; // Show options
+                loginForm.style.display = 'none'; // Hide form
+                forgotPasswordForm.style.display = 'none'; // Hide form
+
                 welcomeText.textContent = `Welcome`; 
                 appHeaderText.textContent = "Game Battle"; 
                 logoutBtnHeader.style.display = 'none'; 
@@ -623,6 +663,56 @@
                 history.replaceState(null, '', window.location.pathname);
             } 
         });
+
+        // --- NEW LOGIN FLOW HANDLERS ---
+        if(googleLoginBtn) {
+            googleLoginBtn.addEventListener('click', () => {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                auth.signInWithPopup(provider)
+                    .then((result) => {
+                        const user = result.user;
+                        const isNewUser = result.additionalUserInfo.isNewUser;
+
+                        if (isNewUser) {
+                            db.collection('users').doc(user.uid).set({
+                                username: user.displayName,
+                                email: user.email,
+                                ffId: '',
+                                ign: '',
+                                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                                walletBalance: 0
+                            }, { merge: true }).then(() => {
+                                showNotification("Welcome! Your account has been created.", "success");
+                            }).catch(err => {
+                                console.error("Error creating user profile:", err);
+                                showNotification("Login successful, but failed to create profile.", "warning");
+                            });
+                        } else {
+                            showNotification("Welcome back!", "success");
+                        }
+                    }).catch((error) => {
+                        console.error("Google Sign-In Error:", error);
+                        showNotification(`Google Sign-In Error: ${error.message}`, "error");
+                    });
+            });
+        }
+        
+        if(emailLoginBtn) {
+            emailLoginBtn.addEventListener('click', () => {
+                loginOptionsContainer.style.display = 'none';
+                loginForm.style.display = 'block';
+                isSignUpMode = false;
+                updateAuthFormUI();
+            });
+        }
+
+        if(backToOptionsLink) {
+             backToOptionsLink.addEventListener('click', () => {
+                loginForm.style.display = 'none';
+                forgotPasswordForm.style.display = 'none';
+                loginOptionsContainer.style.display = 'flex';
+            });
+        }
 
         function navigateToPage(pageId, isInitialLoad = false) {
             const newHash = `#${pageId}`;
@@ -910,7 +1000,7 @@
         if (forgotPasswordLink) { forgotPasswordLink.addEventListener('click', () => { loginForm.style.display = 'none'; forgotPasswordForm.style.display = 'block'; formTitle.textContent = "Reset Password"; });}
         if (backToLoginLink) { backToLoginLink.addEventListener('click', () => { forgotPasswordForm.style.display = 'none'; loginForm.style.display = 'block'; isSignUpMode = false; updateAuthFormUI(); });}
         if (forgotPasswordForm) { forgotPasswordForm.addEventListener('submit', (e) => { e.preventDefault(); const email = resetEmailInput.value; if (!email) { showNotification("Please enter your email.", "error"); return; } const forgotPassButton = forgotPasswordForm.querySelector('button[type="submit"]'); forgotPassButton.disabled = true; forgotPassButton.textContent = "Sending..."; auth.sendPasswordResetEmail(email) .then(() => { showNotification("Password reset email sent!", "success"); forgotPasswordForm.style.display = 'none'; loginForm.style.display = 'block'; isSignUpMode = false; updateAuthFormUI(); if(resetEmailInput) resetEmailInput.value = ''; }) .catch((error) => { showNotification(`Error: ${error.message}`, "error"); }) .finally(() => { forgotPassButton.disabled = false; forgotPassButton.textContent = "Send Reset Link"; }); });}
-        function updateAuthFormUI() { if (isSignUpMode) { formTitle.textContent = "Sign Up"; authButton.textContent = "Sign Up"; if(usernameGroup) usernameGroup.style.display = "block"; if(usernameInput) usernameInput.required = true; if(passwordGroup) passwordGroup.style.display = 'block'; if(passwordInput) passwordInput.required = true; toggleAuthModeLink.textContent = "Login"; if(forgotPasswordLink) forgotPasswordLink.style.display = 'block'; } else { formTitle.textContent = "Login"; authButton.textContent = "Login"; if(usernameGroup) usernameGroup.style.display = "none"; if(usernameInput) usernameInput.required = false; if(passwordGroup) passwordGroup.style.display = 'block'; if(passwordInput) passwordInput.required = true; toggleAuthModeLink.textContent = "Sign Up"; if(forgotPasswordLink) forgotPasswordLink.style.display = 'block'; } }
+        function updateAuthFormUI() { if (isSignUpMode) { formTitle.textContent = "Sign Up"; authButton.textContent = "Sign Up"; if(usernameGroup) usernameGroup.style.display = "block"; if(usernameInput) usernameInput.required = true; if(passwordGroup) passwordGroup.style.display = 'block'; if(passwordInput) passwordInput.required = true; toggleAuthModeLink.textContent = "Already have an account? Login"; if(forgotPasswordLink) forgotPasswordLink.style.display = 'none'; } else { formTitle.textContent = "Login"; authButton.textContent = "Login"; if(usernameGroup) usernameGroup.style.display = "none"; if(usernameInput) usernameInput.required = false; if(passwordGroup) passwordGroup.style.display = 'block'; if(passwordInput) passwordInput.required = true; toggleAuthModeLink.textContent = "Need an account? Sign Up"; if(forgotPasswordLink) forgotPasswordLink.style.display = 'block'; } }
         function viewTournamentDetails(tournamentId) { const tournament = allTournamentsCache.find(t => t.id === tournamentId); if(!tournament) { showNotification("Tournament details not found.", "error"); return; } const displayDateTime = tournament.dateTime ?  new Date(tournament.dateTime.toDate ? tournament.dateTime.toDate() : tournament.dateTime).toLocaleString('en-IN', {  year: 'numeric', month:'long',day:'numeric',hour:'numeric',minute:'2-digit', hour12: true  }) : 'Date N/A'; const entryFeeText = (tournament.entryFee && parseFloat(tournament.entryFee) > 0) ? `₹${tournament.entryFee}` : "Free"; const prizePoolText = (tournament.prizePool && parseFloat(tournament.prizePool) > 0) ? `₹${tournament.prizePool}` : "N/A"; const prizePerKillText = (tournament.prizePerKill && parseFloat(tournament.prizePerKill) > 0) ? `₹${tournament.prizePerKill}` : "N/A"; let details = `Tournament: ${tournament.name}\n\nDate & Time: ${displayDateTime}\nMode: ${tournament.mode || 'N/A'}\nMap: ${tournament.map || 'N/A'}\nEntry Fee: ${entryFeeText}\nPrize Pool: ${prizePoolText}\nPrize Per Kill: ${prizePerKillText}\nRules: ${tournament.rules || 'Standard rules apply.'}\n\n`; if (isRegisteredForTournament(tournamentId)) { if (tournament.roomDetails && (tournament.status === 'Live' || tournament.status === 'Upcoming')) { details += `Room ID & Password: ${tournament.roomDetails}\n(Usually available 15-30 mins before match start)\n`; } else if (tournament.status === 'Complete' && tournament.roomDetails) { details += `Room Details (Past): ${tournament.roomDetails}\n`; } else { details += `Room ID & Password: Will be available on "My Games" page or via notification closer to match time.\n`; } } else { details += `Register to see Room ID & Password when available.\n`; } alert(details); }
         const registrationForm = document.getElementById('registrationForm'); const regTournamentIdInput = document.getElementById('regTournamentIdInput'); const regTournamentModeInput = document.getElementById('regTournamentModeInput'); const teamDetailsRegDiv = document.querySelectorAll('.team-input'); async function openRegistrationModal(tournamentId) { if(!currentUser){showNotification("Please login to register.","info");return;} const t=allTournamentsCache.find(t=>t.id===tournamentId); if(!t){showNotification("Tournament not found.","error");return;} if(t.status !== 'Upcoming'){showNotification(`Cannot register: Tournament is ${t.status}.`,"warning");return;} const isFull = (t.registeredPlayers ? t.registeredPlayers.length : 0) >= t.maxPlayers; if(isFull) {showNotification("Cannot register: Tournament is full.","warning");return;} if(isRegisteredForTournament(tournamentId)){showNotification("You are already registered.","warning");return;} try{const d=await db.collection('users').doc(currentUser.uid).get(); if(d.exists){const ud=d.data(); document.getElementById('playerNameReg').value=ud.ign||''; document.getElementById('ffIdReg').value=ud.ffId||'';}else{document.getElementById('playerNameReg').value=''; document.getElementById('ffIdReg').value='';}}catch(e){showNotification("Error fetching profile.","error");return;} document.getElementById('modalTournamentNameReg').textContent=`Register for ${t.name}`; document.getElementById('modalTournamentInfoReg').textContent=`Mode: ${t.mode} | Entry: ${(t.entryFee&&parseFloat(t.entryFee)>0)?'₹'+t.entryFee:'Free'}`; regTournamentIdInput.value=tournamentId; regTournamentModeInput.value=t.mode.toLowerCase(); const itm=t.mode.toLowerCase()==='duo'||t.mode.toLowerCase()==='squad'; teamDetailsRegDiv.forEach(el=>el.style.display=itm?'block':'none'); if(document.getElementById('teamNameReg')) document.getElementById('teamNameReg').required=itm; const efn=parseFloat(t.entryFee)||0; const finalRegisterBtn=document.getElementById('finalRegisterBtn'); if(finalRegisterBtn){finalRegisterBtn.textContent=efn>0?`Pay ₹${t.entryFee} & Join`:'Join for Free';finalRegisterBtn.style.display='block'; finalRegisterBtn.disabled = false;} openModal('registrationModal'); }
         if(registrationForm)registrationForm.addEventListener('submit', async (e) => { e.preventDefault(); handleRegistration(); });
