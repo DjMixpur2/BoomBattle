@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Advanced Landscape Video Player</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Frame-Options" content="deny">
+
+    <!-- Plyr Player CSS (CDN) -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <!-- Font Awesome for Icons (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Plyr Player JavaScript (CDN) -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
+    <style>
+        /* Basic page styling */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #000;
+        }
+
+        /* Container to hold the player */
+        #player-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Making sure the player takes up the full space */
+        .plyr, .plyr__video-wrapper {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Custom buttons (Download & Share) styling */
+        .plyr__video-wrapper .plyr-custom-button {
+            position: absolute;
+            top: 15px;
+            width: 34px;
+            height: 34px;
+            background-color: rgba(0, 0, 0, 0.65);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 15;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-size: 16px;
+        }
+
+        .plyr__video-wrapper .plyr-custom-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+            color: black;
+        }
+        
+        /* Positioning the buttons */
+        .plyr-download-button { left: 15px; }
+        .plyr-share-button { left: 60px; }
+
+        /* Icons using Font Awesome */
+        .plyr-download-button::before {
+            font-family: "Font Awesome 5 Free";
+            content: "\f019"; /* Download icon */
+            font-weight: 900;
+        }
+
+        .plyr-share-button::before {
+            font-family: "Font Awesome 5 Free";
+            content: "\f1e0"; /* Share icon */
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="player-container">
+        <!-- The video element that Plyr will control -->
+        <video id="player" controls preload="auto">
+            <!-- Video source will be set by JavaScript -->
+        </video>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- CONFIGURATION ---
+            // Yahan par apna video ka link daalein
+            const videoSrc = 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4';
+            // --- END CONFIGURATION ---
+
+            const videoElement = document.getElementById('player');
+            
+            // Set the video source dynamically
+            videoElement.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
+
+            // Initialize the Plyr player
+            const player = new Plyr('#player', {
+                title: 'My Awesome Video',
+                // Enabling all useful controls
+                controls: [
+                    'play-large', 'restart', 'rewind', 'play', 'fast-forward', 'progress',
+                    'current-time', 'duration', 'mute', 'volume', 'settings', 'pip',
+                    'airplay', 'fullscreen'
+                ],
+                // Settings menu options
+                settings: ['speed', 'loop'],
+                speed: {
+                    selected: 1,
+                    options: [0.5, 0.75, 1, 1.25, 1.5, 2]
+                },
+                keyboard: { focused: true, global: true },
+                tooltips: { controls: true, seek: true },
+            });
+
+            // Add custom buttons once the player is ready
+            player.on('ready', event => {
+                const wrapper = player.elements.container.querySelector('.plyr__video-wrapper');
+                if (!wrapper) return;
+
+                // 1. Create Download Button
+                const downloadButton = document.createElement('a');
+                downloadButton.className = 'plyr-custom-button plyr-download-button';
+                downloadButton.href = videoSrc;
+                downloadButton.target = '_blank';
+                downloadButton.setAttribute('download', '');
+                downloadButton.setAttribute('title', 'Download');
+                downloadButton.onclick = e => e.stopPropagation();
+                wrapper.appendChild(downloadButton);
+
+                // 2. Create Share Button
+                const shareButton = document.createElement('div');
+                shareButton.className = 'plyr-custom-button plyr-share-button';
+                shareButton.setAttribute('title', 'Share');
+                shareButton.onclick = e => {
+                    e.stopPropagation();
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Check out this video!',
+                            url: window.location.href // Shares the page URL
+                        }).catch(err => console.error('Share failed:', err));
+                    } else {
+                        alert('Your browser does not support sharing.');
+                    }
+                };
+                wrapper.appendChild(shareButton);
+            });
+
+            // --- Automatic Landscape on Fullscreen Logic ---
+            player.on('enterfullscreen', event => {
+                // Check if Screen Orientation API is available (mostly for mobiles)
+                if (screen.orientation && typeof screen.orientation.lock === 'function') {
+                    try {
+                        // Lock the screen to landscape mode
+                        screen.orientation.lock('landscape');
+                    } catch (err) {
+                        console.warn('Could not lock screen orientation:', err);
+                    }
+                }
+            });
+
+            player.on('exitfullscreen', event => {
+                // When exiting fullscreen, unlock the orientation
+                if (screen.orientation && typeof screen.orientation.unlock === 'function') {
+                    try {
+                        screen.orientation.unlock();
+                    } catch (err) {
+                        console.warn('Could not unlock screen orientation:', err);
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
